@@ -9,281 +9,31 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
-<style>
-:root{
-  --cobalt:#0066CC;
-  --cobalt-deep:#0055AA;
-  --signal:#F63305;
-  --harbor:#0B2447;
-  --siding:#E9F0F8;
-  --white:#FFFFFF;
-  --steel:#4E5D73;
-  --rule:rgba(11,36,71,.14);
-  --pad-x:1.25rem;
-  --sec-y:clamp(4.5rem,9vw,7.5rem);
-  --overhang:5rem;
-}
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scrollbar-color:var(--cobalt) var(--siding)}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{
-  margin:0;
-  font-family:"Archivo",system-ui,sans-serif;
-  font-size:1.0625rem;
-  line-height:1.6;
-  font-stretch:100%;
-  color:var(--harbor);
-  background:var(--white);
-  caret-color:var(--cobalt);
-  font-variant-numeric:tabular-nums;
-  text-rendering:optimizeLegibility;
-}
-::selection{background:var(--signal);color:var(--white)}
-img{display:block;max-width:100%}
-a{color:var(--cobalt);text-underline-offset:.22em;text-decoration-thickness:1.5px}
-a:hover{text-decoration-thickness:2.5px}
-:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
-.on-dark :focus-visible{outline-color:var(--white)}
-h1,h2,h3{margin:0;text-wrap:balance}
-p{margin:0 0 1rem;text-wrap:pretty}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.skip{position:absolute;left:1rem;top:.75rem;z-index:30;background:var(--harbor);color:var(--white);padding:.75rem 1rem;transform:translateY(-200%)}
-.skip:focus{transform:none}
-.wrap{width:min(100% - 2*var(--pad-x),72rem);margin-inline:auto}
-[id]{scroll-margin-top:80px}
-
-/* Buttons: square corners everywhere, matching the square photo */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
-  min-height:48px;padding:0 1.3rem;border-radius:0;
-  font:inherit;font-weight:650;font-stretch:106%;font-size:1.0625rem;line-height:1.1;
-  text-decoration:none;white-space:nowrap;cursor:pointer;border:0;
-  transition:background-color .15s ease,color .15s ease,transform .15s ease;
-}
-.btn:active{transform:translateY(1px)}
-.btn svg{width:20px;height:20px;flex:none}
-.btn-cobalt{background:var(--cobalt);color:var(--white)}
-.btn-cobalt:hover{background:var(--cobalt-deep)}
-.btn-white{background:var(--white);color:var(--cobalt)}
-.btn-white:hover{background:var(--siding)}
-.textlink{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
-
-/* Header */
-.site-head{
-  position:sticky;top:0;z-index:20;height:64px;background:var(--white);
-  border-bottom:1px solid transparent;
-  transition:border-color .2s ease;
-}
-.site-head.is-scrolled{border-bottom-color:var(--rule)}
-.head-in{height:100%;display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
-.mark{
-  font-weight:800;font-stretch:125%;font-size:1.25rem;letter-spacing:-.01em;line-height:1;
-  color:var(--harbor);text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;min-height:44px;
-}
-.mark span{color:var(--cobalt)}
-.nav{display:flex;align-items:stretch;gap:2rem;height:100%}
-.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none;margin:0;padding:0}
-.nav-links a{color:var(--harbor);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;min-height:44px}
-.nav-links a:hover{text-decoration:underline;text-decoration-color:var(--cobalt)}
-/* Call tab: full header height, flows into the cobalt hero below */
-.site-head .btn{height:100%;min-height:0;padding:0 1.25rem}
-.site-head .num{display:none}
-@media (min-width:1000px){.site-head .num{display:inline}}
-@media (max-width:719px){.nav-links{display:none}.mark{font-size:1.125rem}}
-
-/* Hero */
-.hero{
-  display:grid;
-  grid-template-columns:minmax(var(--pad-x),1fr) repeat(12,minmax(0,6rem)) minmax(var(--pad-x),1fr);
-  grid-template-rows:auto auto;
-  background-color:var(--cobalt);
-  color:var(--white);
-  position:relative;
-}
-.hero h1{
-  grid-column:2/14;grid-row:1;
-  color:var(--white);
-  font-weight:800;font-stretch:118%;
-  font-size:clamp(2.5rem,5.8vw,5rem);
-  line-height:1.02;letter-spacing:-.02em;
-  padding-top:clamp(3rem,6vw,5rem);
-}
-.hero h1 .l{display:inline}
-.hero-copy{
-  grid-column:2/8;grid-row:2;position:relative;z-index:2;
-  padding:2.25rem 2rem 3.5rem 0;
-}
-.hero-copy p{font-size:1.1875rem;line-height:1.55;max-width:31ch;color:var(--white);margin-bottom:1.75rem}
-.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem}
-.hero-actions .textlink{color:var(--white)}
-.shot{
-  --x:86%;
-  grid-column:8/14;grid-row:2;position:relative;z-index:1;
-  align-self:start;
-  margin-top:2.25rem;margin-bottom:calc(var(--overhang) * -1);
-  width:100%;aspect-ratio:16/10;
-  overflow:hidden;background:var(--siding);
-}
-/* Crop out the old-site header (top 17%) and baked banner (bottom 11%) */
-.shot img{
-  position:absolute;top:-23.6%;left:var(--x);
-  height:138.9%;width:auto;max-width:none;
-  transform:translateX(calc(var(--x) * -1));
-}
-@media (min-width:900px){.hero h1 .l{display:block}}
-@media (max-width:899px){
-  :root{--overhang:2.5rem}
-  .hero{grid-template-columns:var(--pad-x) minmax(0,1fr) var(--pad-x);grid-template-rows:auto auto auto}
-  .hero h1{grid-column:2;padding-top:3rem}
-  .hero-copy{grid-column:2;padding:1.5rem 0 2.25rem}
-  .shot{--x:78%;grid-column:2;grid-row:3;margin-top:0;aspect-ratio:4/3}
-}
-
-/* Sections */
-.section{padding:var(--sec-y) 0 clamp(5rem,10vw,8.25rem)}
-.after-hero{padding-top:calc(var(--sec-y) + var(--overhang))}
-.tint{background:var(--siding)}
-h2{font-size:clamp(1.75rem,3.6vw,2.75rem);font-weight:750;font-stretch:112%;line-height:1.1;letter-spacing:-.015em;margin-bottom:1.25rem}
-.lede{font-size:1.1875rem;max-width:58ch}
-
-/* Specials */
-.sheet{margin:2.25rem 0 1.75rem;max-width:52rem}
-.line{display:grid;grid-template-columns:1fr auto;align-items:baseline;column-gap:1rem;padding:1.4rem 0}
-.line + .line{border-top:1px solid var(--rule)}
-.line dt{display:flex;align-items:baseline;gap:1rem;font-size:1.4375rem;font-weight:600;font-stretch:104%}
-.line dt::after{content:"";flex:1;min-width:2rem;border-bottom:2px dotted #8A97AB;transform:translateY(-.3em)}
-.line dd{margin:0}
-.price{font-size:2.75rem;font-weight:800;font-stretch:118%;line-height:1;color:var(--signal);letter-spacing:-.01em}
-.terms{font-size:1.1875rem;font-weight:600;text-align:right}
-.line .note{grid-column:1/-1;color:var(--steel);margin-top:.4rem}
-.aside{color:var(--steel);max-width:60ch}
-.aside a{font-weight:600}
-@media (max-width:640px){
-  .line{grid-template-columns:1fr}
-  .line dt::after{display:none}
-  .line .price{margin-top:.35rem}
-  .line .terms{text-align:left;margin-top:.35rem}
-}
-
-/* Services */
-.groups{display:grid;gap:2.5rem;margin-top:3rem}
-.groups h3{font-size:1.1875rem;font-weight:650;font-stretch:104%;line-height:1.3;color:var(--steel);margin-bottom:.6rem}
-.svc{display:flex;flex-wrap:wrap;row-gap:.2rem;list-style:none;margin:0;padding:0}
-.svc li{
-  font-size:clamp(1.25rem,2.4vw,1.875rem);font-weight:700;font-stretch:110%;
-  letter-spacing:-.01em;line-height:1.4;color:var(--harbor);
-}
-.svc li:not(:last-child)::after{content:"/";color:var(--cobalt);font-weight:400;margin:0 .45em}
-.makes{margin-top:3rem;max-width:60ch}
-.makes p{margin-bottom:.5rem}
-.makes a{font-weight:600}
-
-/* Warranty: one sentence, with a rolling reading inside it */
-.w-title{margin-bottom:2.25rem}
-.w-lead{display:block}
-.reading{
-  --D:clamp(3.5rem,13vw,8rem);
-  display:flex;flex-wrap:wrap;align-items:flex-end;column-gap:.35em;row-gap:.25rem;
-  margin-top:.6rem;
-}
-.odo{
-  --h:1.05em;
-  display:flex;align-items:flex-end;
-  font-size:var(--D);font-weight:800;font-stretch:125%;line-height:1;letter-spacing:0;
-  color:var(--harbor);font-variant-numeric:tabular-nums;
-  view-timeline:--odo block;
-}
-.drum{display:block;height:var(--h);overflow:hidden;padding:0 .015em}
-.drum.last{color:var(--signal)}
-.strip{
-  display:block;width:1ch;line-height:var(--h);
-  word-break:break-all;overflow-wrap:anywhere;
-  transform:translateY(calc(var(--n) * var(--h) * -1));
-}
-.comma{display:block;line-height:var(--h);padding:0 .02em 0 0}
-.tail{padding-bottom:max(0px,calc(.19 * var(--D) - .216em))}
-.warranty p{max-width:58ch;font-size:1.1875rem}
-@supports (animation-timeline:view()){
-  @media (prefers-reduced-motion:no-preference){
-    .strip{
-      animation-name:roll;
-      animation-duration:auto;
-      animation-timing-function:cubic-bezier(.2,.7,.2,1);
-      animation-fill-mode:both;
-      animation-timeline:--odo;
-      animation-range:cover var(--s) cover 50%;
-    }
-  }
-}
-@keyframes roll{
-  from{transform:translateY(0)}
-  to{transform:translateY(calc(var(--n) * var(--h) * -1))}
-}
-
-/* Ride band */
-.ride{background:var(--cobalt);color:var(--white);padding:clamp(3.5rem,7vw,5.5rem) 0}
-.ride-in{display:flex;align-items:center;gap:2.5rem}
-.ride svg{flex:none;width:132px;height:77px;color:var(--white)}
-.ride h2{color:var(--white);margin-bottom:.6rem}
-.ride p{font-size:1.4375rem;line-height:1.45;max-width:38ch;margin:0;color:var(--white)}
-@media (max-width:640px){.ride-in{flex-direction:column;align-items:flex-start;gap:1.5rem}.ride svg{width:104px;height:61px}.ride p{font-size:1.25rem}}
-
-/* Story */
-.col{max-width:60ch}
-
-/* Visit */
-.visit-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem 5rem;align-items:start}
-address{font-style:normal;font-size:1.4375rem;font-weight:600;line-height:1.35;display:flex;gap:.75rem;margin:.5rem 0 1.75rem}
-address svg{flex:none;width:24px;height:24px;margin-top:.2em;color:var(--cobalt)}
-.visit-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;margin-bottom:1.75rem}
-.tel{font-size:1.4375rem;font-weight:700;font-stretch:108%;color:var(--harbor);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
-.tel:hover{color:var(--cobalt)}
-.reviews{color:var(--steel);margin:0;max-width:44ch}
-.reviews a{font-weight:600}
-.hours h3{font-size:1.4375rem;font-weight:700;font-stretch:108%;margin-bottom:.5rem}
-.status{font-weight:650;color:var(--cobalt-deep);margin:0 0 .5rem}
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-th,td{padding:.9rem 0;font-size:1.0625rem;vertical-align:top}
-th{text-align:left;font-weight:600;padding-right:1rem}
-td{text-align:right;color:var(--steel)}
-tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
-@media (max-width:820px){.visit-grid{grid-template-columns:1fr}}
-
-/* Footer */
-.foot{background:var(--harbor);color:#C9D6E6;padding:4rem 0 3rem}
-.foot-grid{display:grid;grid-template-columns:1.3fr 1fr auto;gap:2.5rem 3rem}
-.foot .mark{color:var(--white)}
-.foot .mark span{color:#9CC6F2}
-.foot p{margin:.5rem 0 0}
-.foot a{color:var(--white)}
-.foot ul{list-style:none;margin:0;padding:0}
-.foot li a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
-.foot li a:hover{text-decoration:underline}
-.foot .copy{margin-top:2.5rem;font-size:.9375rem;color:#A9B8CC}
-@media (max-width:760px){.foot-grid{grid-template-columns:1fr}}
-
-/* Phone call bar */
-.callbar{display:none}
-@media (max-width:719px){
-  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-  .callbar{
-    display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1rem;
-    position:fixed;left:0;right:0;bottom:0;z-index:25;width:100%;
-    background:var(--white);border-top:1px solid var(--rule);
-    padding:.7rem var(--pad-x) calc(.7rem + env(safe-area-inset-bottom));
-  }
-  .callbar .btn{width:100%;padding:0 .9rem}
-  .callbar .textlink{padding:0 .25rem}
-}
-</style>
+<link rel="stylesheet" href="styles.css">
+<script src="main.js"></script>
 </head>
 <body>
 <div id="concept-banner" style="background:#111;color:#fff;font:13px/1.4 system-ui,sans-serif;text-align:center;padding:8px 16px;position:relative;z-index:99"><b style="color:#ffd24a">Design concept</b> by Darren Website Studio for R&amp;M Automotive Inc. This is not the official website.</div>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="car">
+      <path d="M34 44h-4a4 4 0 0 1-4-4v-6a5 5 0 0 1 4-5l8-2 9-9a7 7 0 0 1 5-2h16a7 7 0 0 1 5.5 2.6L80 27l5 1a5 5 0 0 1 4 5v7a4 4 0 0 1-4 4h-3"/>
+      <path d="M46 44h24M39 27h41M58 16v11"/>
+      <circle cx="40" cy="44" r="6"/>
+      <circle cx="76" cy="44" r="6"/>
+    </g>
+    <g id="phone"><path d="M5 3.5h3.2l1.6 4.4-2.1 1.4a11.5 11.5 0 0 0 7 7l1.4-2.1 4.4 1.6V19a1.8 1.8 0 0 1-1.9 1.8A16.5 16.5 0 0 1 3.2 5.4 1.8 1.8 0 0 1 5 3.5z"/></g>
+    <g id="tick"><rect x="3.5" y="3.5" width="17" height="17"/><path d="M7.6 12.3l3 3 5.9-6.4"/></g>
+  </defs>
+</svg>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-head" id="top">
   <div class="wrap head-in">
-    <a class="mark" href="#top" aria-label="R&amp;M Automotive, back to top"><span>R&amp;M</span>&nbsp;Automotive</a>
+    <a class="mark" href="#top" aria-label="R&amp;M Automotive, back to top">
+      <svg class="mark-car" viewBox="23 11 70 40" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#car"/></svg>
+      <span>R&amp;M</span>&nbsp;Automotive
+    </a>
     <nav class="nav" aria-label="Main">
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
@@ -291,7 +41,7 @@ tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
         <li><a href="#visit">Visit</a></li>
       </ul>
       <a class="btn btn-cobalt" href="tel:+13024561026">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.4-2.1 1.4a11.5 11.5 0 0 0 7 7l1.4-2.1 4.4 1.6V19a1.8 1.8 0 0 1-1.9 1.8A16.5 16.5 0 0 1 3.2 5.4 1.8 1.8 0 0 1 5 3.5z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#phone"/></svg>
         Call<span class="num">&nbsp;(302) 456-1026</span>
       </a>
     </nav>
@@ -306,7 +56,7 @@ tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
       <p>Full-service repair and maintenance for cars, light trucks and vans, all makes and models. In Newark since 1992.</p>
       <div class="hero-actions">
         <a class="btn btn-white" href="tel:+13024561026">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.4-2.1 1.4a11.5 11.5 0 0 0 7 7l1.4-2.1 4.4 1.6V19a1.8 1.8 0 0 1-1.9 1.8A16.5 16.5 0 0 1 3.2 5.4 1.8 1.8 0 0 1 5 3.5z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#phone"/></svg>
           Call (302) 456-1026
         </a>
         <a class="textlink" href="https://www.google.com/maps/search/?api=1&amp;query=2201+Ogletown+Rd+C%2C+Newark%2C+DE+19711%2C+USA" target="_blank" rel="noopener">Get directions</a>
@@ -340,29 +90,29 @@ tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
       <h2 id="services-title">What we fix.</h2>
       <p class="lede">Whether you need an oil change, an entire engine replaced, or you have an electrical problem that's driving you crazy, our technicians have the solution.</p>
       <div class="groups">
-        <div>
+        <div class="group">
           <h3>Checks and maintenance</h3>
           <ul class="svc">
-            <li>Computer Diagnostics</li>
-            <li>Complete Safety Analysis</li>
-            <li>Oil Changes</li>
-            <li>Tune-ups</li>
-            <li>30, 60, 90K Service</li>
-            <li>Belts &amp; Hoses</li>
-            <li>Coolant Systems</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Computer Diagnostics</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Complete Safety Analysis</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Oil Changes</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Tune-ups</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>30, 60, 90K Service</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Belts &amp; Hoses</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Coolant Systems</li>
           </ul>
         </div>
-        <div>
+        <div class="group">
           <h3>Repairs</h3>
           <ul class="svc">
-            <li>Brakes</li>
-            <li>Electrical Systems</li>
-            <li>Air Conditioning Service</li>
-            <li>Transmission Work</li>
-            <li>Engine Work</li>
-            <li>Exhaust Systems</li>
-            <li>Steering and Suspensions</li>
-            <li>Emission Repair</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Brakes</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Electrical Systems</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Air Conditioning Service</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Transmission Work</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Engine Work</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Exhaust Systems</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Steering and Suspensions</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#tick"/></svg>Emission Repair</li>
           </ul>
         </div>
       </div>
@@ -380,12 +130,12 @@ tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
         <span class="reading">
           <span class="sr-only">24,000</span>
           <span class="odo" aria-hidden="true">
-            <span class="drum" style="--s:24%"><span class="strip" style="--n:12">0123456789012</span></span>
-            <span class="drum" style="--s:18%"><span class="strip" style="--n:14">012345678901234</span></span>
+            <span class="drum"><span class="strip">2</span></span>
+            <span class="drum"><span class="strip">4</span></span>
             <span class="comma">,</span>
-            <span class="drum" style="--s:12%"><span class="strip" style="--n:10">01234567890</span></span>
-            <span class="drum" style="--s:6%"><span class="strip" style="--n:20">012345678901234567890</span></span>
-            <span class="drum last" style="--s:0%"><span class="strip" style="--n:30">0123456789012345678901234567890</span></span>
+            <span class="drum"><span class="strip">0</span></span>
+            <span class="drum"><span class="strip">0</span></span>
+            <span class="drum last"><span class="strip">0</span></span>
           </span>
           <span class="tail">miles, or 24 months.</span>
         </span>
@@ -398,10 +148,7 @@ tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
     <div class="wrap ride-in">
       <svg viewBox="0 0 96 56" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M4 24h14M8 32h12M2 40h14"/>
-        <path d="M34 44h-4a4 4 0 0 1-4-4v-6a5 5 0 0 1 4-5l8-2 9-9a7 7 0 0 1 5-2h16a7 7 0 0 1 5.5 2.6L80 27l5 1a5 5 0 0 1 4 5v7a4 4 0 0 1-4 4h-3"/>
-        <path d="M46 44h24M39 27h41M58 16v11"/>
-        <circle cx="40" cy="44" r="6"/>
-        <circle cx="76" cy="44" r="6"/>
+        <use href="#car"/>
       </svg>
       <div>
         <h2 id="ride-title">Need a ride while we work?</h2>
@@ -431,7 +178,7 @@ tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
           <a class="btn btn-cobalt" href="https://www.google.com/maps/search/?api=1&amp;query=2201+Ogletown+Rd+C%2C+Newark%2C+DE+19711%2C+USA" target="_blank" rel="noopener">Get directions</a>
           <a class="tel" href="tel:+13024561026">(302) 456-1026</a>
         </div>
-        <p class="reviews">Rated 4.6 on Google from 255 reviews. See what our customers are saying, and leave a comment about your visit, on <a href="http://maps.google.com/maps/place?hl=en&amp;prmd=ivnscm&amp;bav=on.2,or.r_gc.r_pw.&amp;biw=1259&amp;bih=624&amp;wrapid=tlif130664068490610&amp;um=1&amp;ie=UTF-8&amp;q=auto+repair+in+newark+delaware&amp;fb=1&amp;gl=us&amp;hq=auto+repair&amp;hnear=0x89c77a9ae39789eb:0x2ee246f2974c385c,Newark,+DE&amp;cid=5672940476731622440&amp;ei=XMHhTbD9Ief30gGLooDDBw&amp;sa=X&amp;oi=local_result&amp;ct=placepage-link&amp;resnum=4&amp;ved=0CFEQ4gkwAzgK" target="_blank" rel="noopener">our Google listing</a>.</p>
+        <p class="reviews">See what our customers are saying, and leave a comment about your visit, on <a href="http://maps.google.com/maps/place?hl=en&amp;prmd=ivnscm&amp;bav=on.2,or.r_gc.r_pw.&amp;biw=1259&amp;bih=624&amp;wrapid=tlif130664068490610&amp;um=1&amp;ie=UTF-8&amp;q=auto+repair+in+newark+delaware&amp;fb=1&amp;gl=us&amp;hq=auto+repair&amp;hnear=0x89c77a9ae39789eb:0x2ee246f2974c385c,Newark,+DE&amp;cid=5672940476731622440&amp;ei=XMHhTbD9Ief30gGLooDDBw&amp;sa=X&amp;oi=local_result&amp;ct=placepage-link&amp;resnum=4&amp;ved=0CFEQ4gkwAzgK" target="_blank" rel="noopener">our Google listing</a>.</p>
       </div>
       <div class="hours">
         <h3>Hours</h3>
@@ -440,7 +187,7 @@ tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
           <caption class="sr-only">Shop hours</caption>
           <tbody>
             <tr><th scope="row">Monday through Friday</th><td>8AM to 5PM</td></tr>
-            <tr><th scope="row">Saturday</th><td>Open</td></tr>
+            <tr><th scope="row">Saturday</th><td>Open, call for times</td></tr>
             <tr><th scope="row">Sunday</th><td>Closed</td></tr>
           </tbody>
         </table>
@@ -454,12 +201,18 @@ tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a class="mark" href="#top"><span>R&amp;M</span>&nbsp;Automotive</a>
+        <a class="mark" href="#top">
+          <svg class="mark-car" viewBox="23 11 70 40" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#car"/></svg>
+          <span>R&amp;M</span>&nbsp;Automotive
+        </a>
         <p>Service &amp; repair at a price that's fair.</p>
       </div>
       <div>
         <p>2201 Ogletown Rd, Suite C<br>Newark, DE 19711</p>
         <p><a href="tel:+13024561026">(302) 456-1026</a></p>
+      </div>
+      <div>
+        <p>Monday through Friday, 8AM to 5PM<br>Saturday open, call for times<br>Sunday closed</p>
       </div>
       <nav aria-label="Footer">
         <ul>
@@ -475,36 +228,10 @@ tr + tr th,tr + tr td{border-top:1px solid var(--rule)}
 
 <div class="callbar" role="region" aria-label="Quick contact">
   <a class="btn btn-cobalt" href="tel:+13024561026">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.4-2.1 1.4a11.5 11.5 0 0 0 7 7l1.4-2.1 4.4 1.6V19a1.8 1.8 0 0 1-1.9 1.8A16.5 16.5 0 0 1 3.2 5.4 1.8 1.8 0 0 1 5 3.5z"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#phone"/></svg>
     Call (302) 456-1026
   </a>
   <a class="textlink" href="https://www.google.com/maps/search/?api=1&amp;query=2201+Ogletown+Rd+C%2C+Newark%2C+DE+19711%2C+USA" target="_blank" rel="noopener">Directions</a>
 </div>
-
-<script>
-(function(){
-  var head=document.querySelector('.site-head');
-  function onScroll(){head.classList.toggle('is-scrolled',window.scrollY>8);}
-  onScroll();
-  window.addEventListener('scroll',onScroll,{passive:true});
-
-  /* Live status from the posted hours, in shop time. Saturday times are not published, so no status is shown then. */
-  var el=document.getElementById('status');
-  try{
-    var parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',weekday:'short',hour:'numeric',minute:'numeric',hourCycle:'h23'}).formatToParts(new Date());
-    var o={};
-    parts.forEach(function(p){o[p.type]=p.value;});
-    var day=o.weekday;
-    var mins=(parseInt(o.hour,10)%24)*60+parseInt(o.minute,10);
-    var weekday=['Mon','Tue','Wed','Thu','Fri'].indexOf(day)>-1;
-    var t='';
-    if(weekday&&mins>=480&&mins<1020){t='Open now until 5PM.';}
-    else if(weekday&&mins<480){t='Closed now. Opens today at 8AM.';}
-    else if(weekday&&day!=='Fri'){t='Closed now. Opens tomorrow at 8AM.';}
-    else if(day==='Sun'){t='Closed today. Opens Monday at 8AM.';}
-    if(t){el.textContent=t;el.hidden=false;}
-  }catch(e){}
-})();
-</script>
 </body>
 </html>
